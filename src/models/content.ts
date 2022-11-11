@@ -1,7 +1,9 @@
 abstract class Content {
+  title: string
   description: string
 
-  constructor() {
+  constructor(title: string) {
+    this.title = title
     this.description = '';
   }
 

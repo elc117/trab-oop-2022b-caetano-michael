@@ -1,11 +1,26 @@
 class Module {
+  title: string
+  description: string
   contents: Content[]
 
-  constructor() {
+  constructor(title: string) {
+    this.title = title
+    this.description = ''
     this.contents = []
-    let textContent = new TextContent();
-    this.contents.push(textContent);
   }
+
+  addContent(content: Content) {
+    this.contents.push(content)
+  }
+
+  getDescription() {
+    return this.description
+  }
+
+  setDescription(value: string) {
+    this.description = value
+  }
+
 }
 
 export default Module
