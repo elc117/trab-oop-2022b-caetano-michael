@@ -1,0 +1,3 @@
+class AudioContent extends Content {
+
+}

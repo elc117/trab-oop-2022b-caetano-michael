@@ -1,3 +1,3 @@
-import Server from './server';
+import Course from './course';
 
-const app = Server.server.listen(3000, () => console.log("Rodando server porta 3000"));
+const app = Course.run();
