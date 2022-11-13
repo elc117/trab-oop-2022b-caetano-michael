@@ -1,3 +1,5 @@
+import Content from './content'
+
 class Module {
   title: string
   description: string

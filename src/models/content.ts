@@ -16,5 +16,6 @@ abstract class Content {
   }
 
   read() { }
-
 }
+
+export default Content
