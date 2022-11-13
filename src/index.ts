@@ -1,3 +1,3 @@
-import Course from './course';
+import Course from './course'
 
-const app = Course.main();
+const app = Course.main()

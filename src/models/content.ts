@@ -1,10 +1,14 @@
+import IContent from '../Types/IContent';
+
 abstract class Content {
   title: string
   description: string
+  type: string
 
   constructor(title: string) {
     this.title = title
     this.description = '';
+    this.type = ''
   }
 
   getDescription() {
@@ -15,7 +19,15 @@ abstract class Content {
     this.description = value
   }
 
-  read() { }
+  getTitle() {
+    return this.title
+  }
+
+  setTitle(value: string) {
+    this.title = value
+  }
+
+  read() { return null }
 }
 
 export default Content
