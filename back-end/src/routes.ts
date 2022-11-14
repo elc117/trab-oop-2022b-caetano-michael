@@ -7,7 +7,7 @@ routes.get('/index', (req, res) => {
   res.send(course.getIndex())
 })
 
-routes.get('/model/:id', (req, res) => {
+routes.get('/module/:id', (req, res) => {
   res.send(course.getModule(+req.params.id))
 })
 
