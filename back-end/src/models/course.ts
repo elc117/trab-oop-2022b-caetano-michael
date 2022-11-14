@@ -1,8 +1,8 @@
-import IIndex from './Types/IIndex'
-import LinkContent from './models/linkContent'
-import Module from './models/modulo'
-import TextContent from './models/textContent'
-import VideoContent from './models/videoContent'
+import IIndex from '../Types/IIndex'
+import LinkContent from './linkContent'
+import Module from './modulo'
+import TextContent from './textContent'
+import VideoContent from './videoContent'
 
 class Course {
   modules: Module[]

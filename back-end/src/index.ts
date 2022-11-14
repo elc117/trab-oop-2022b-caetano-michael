@@ -1,4 +1,3 @@
-import course from './course'
+import Server from './server';
 
-console.log(course.getIndex())
-console.log(course.getModule(2))
+Server.server.listen(3000, () => console.log("Rodando server porta 3000"));
