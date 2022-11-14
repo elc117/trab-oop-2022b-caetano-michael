@@ -1,5 +1,4 @@
 import Content from './content'
-import * as readline from 'readline'
 
 class Module {
   title: string
@@ -22,11 +21,6 @@ class Module {
 
   setDescription(value: string) {
     this.description = value
-  }
-
-  run() {
-    console.log(this.title)
-    console.log(this.description)
   }
 }
 

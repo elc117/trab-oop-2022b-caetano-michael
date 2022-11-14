@@ -5,7 +5,6 @@ class LinkContent extends Content {
     super(title)
     this.type = "link"
   }
-
 }
 
 export default LinkContent
