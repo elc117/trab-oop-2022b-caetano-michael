@@ -1,8 +1,8 @@
-import IIndex from '../Types/IIndex'
-import LinkContent from './linkContent'
-import Module from './modulo'
-import TextContent from './textContent'
-import VideoContent from './videoContent'
+import IIndex from './Types/IIndex'
+import LinkContent from './models/linkContent'
+import Module from './models/modulo'
+import TextContent from './models/textContent'
+import VideoContent from './models/videoContent'
 
 class Course {
   modules: Module[]
@@ -86,11 +86,11 @@ class Course {
     content = new TextContent('Parte 3')
     content.setDescription('Como você pode iniciar? É muito importante ter em mente que os investimentos dão retorno a médio e longo prazo. Ou seja, não espere ganhar muito dinheiro de um dia para o outro. O investimento precisa se tornar um hábito. Separe uma quantia por mês, ainda que um valor pequeno. Procure uma instituição financeira e analise as opções que ela oferece para investir seu dinheiro de acordo com seu perfil de investidor.')
     module.addContent(content)
+    this.modules.push(module)
   }
 
   getIndex(): IIndex[] {
     return this.modules.map((module, idx) => ({ id: idx, title: module.title }))
-
   }
 
   getModule(id: number): Module {
