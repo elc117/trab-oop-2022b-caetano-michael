@@ -1,4 +1,4 @@
-import IContent from '../Types/IContent';
+import * as readline from 'readline'
 
 abstract class Content {
   title: string
@@ -27,7 +27,17 @@ abstract class Content {
     this.title = value
   }
 
-  read() { return null }
+  run() {
+    console.log(this.title);
+    console.log(this.description);
+    // let rl = readline.createInterface({
+    //   input: process.stdin,
+    //   output: process.stdout
+    // });
+    // rl.question('Pressione enter para avançar...\n', () => {
+    //   rl.close()
+    // })
+  }
 }
 
 export default Content
