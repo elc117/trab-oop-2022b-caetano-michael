@@ -9,15 +9,10 @@ class Server {
     this.server.use(express.json())
     this.server.use(routes)
     this.middleware();
-    this.router();
   }
 
   private middleware() {
     this.server.use(express.json());
-  }
-
-  private router() {
-    // this.server.use(router);
   }
 }
 
