@@ -46,3 +46,48 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   font-weight: 300;
   margin-bottom: 3em;
 }
+
+#accordion-module {
+  min-width: 430px;
+}
+
+#accordion-module .accordion-button.collapsed {
+  border-left: 2px solid #79b2e7;
+}
+
+#accordion-module .accordion-item,
+#accordion-module .accordion-header {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+#accordion-module .accordion-button {
+  background: var(--bs-blue) !important;
+  color: var(--bs-white);
+  font-weight: 500;
+  font-size: 1.25em;
+  padding: 1.2em 1.5em;
+  border-radius: 0;
+  border: 0;
+  transition: all 0.5s ease;
+  outline: none;
+  box-shadow: none;
+}
+
+#accordion-module .accordion-button:hover {
+  font-weight: 700;
+  font-size: 1.26em;
+  transition: all 0.5s ease;
+}
+
+#accordion-module .show .accordion-button {
+  border-left: 2px solid #d5ebff;
+  font-weight: 700;
+  font-size: 1.26em;
+  transition: all 0.5s ease;
+}
+
+#accordion-module .accordion-button::after {
+  display: none;
+}

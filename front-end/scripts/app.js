@@ -10,8 +10,8 @@ getIndex().then(v => {
     v.data.forEach((element, index) => {
         $('#accordion-module').append(`
         <div class="accordion-item">
-            <h2 class="accordion-header j_class" id="${element.id}">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}">
+            <h2 class="accordion-header j_class ${index === 0 ? 'show' : ''}" id="${element.id}">
+            <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}">
                 ${element.title}
             </button>
             </h2>
@@ -23,25 +23,14 @@ getIndex().then(v => {
 $(function(){
     $('body').on('click', '.j_class', function(data){
 
-        // if($(this).find('.accordion-button').hasClass('collapsed')) {
-        //     $(this).find('.accordion-button').toggleClass('collapsed')
-        // } else {
-        //     $(this).find('.accordion-button').toggleClass('collapsed')
-        // }
-
-
-        // $(this).find('.accordion-button').toggleClass('collapsed')
-
-        $(".collapse").removeClass('show')
-        $(this).addClass('show')
-
         if($(`#collapse-${data.currentTarget.id}`).length) {
             console.log(`collapse-${data.currentTarget.id} existe`)
+
         } else {
             $('#accordionClass').append(`
             <div id="collapse-${data.currentTarget.id}" class="accordion-collapse collapse show" aria-labelledby="${data.currentTarget.id}"
             data-bs-parent="#accordionClass">
-                <div class="accordion-body"></div>
+                <div class="accordion-body pe-5"></div>
             </div>
             `)
 
@@ -52,13 +41,11 @@ $(function(){
                     <p>${module.data.description}</p>
                 </div>
 
-                
-                <div class="accordion" id="accordionLessons">
+                <div class="accordion" id="accordionLessons-${data.currentTarget.id}">
                 <div>
                 `)
                 module.data.contents.forEach((element, index) => {
-                    console.log(element, index)
-                    $(`#collapse-${index} #accordionLessons`).append(`
+                    $(`#collapse-${data.currentTarget.id} #accordionLessons-${data.currentTarget.id}`).append(`
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="area-${index}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#class-${index}"
@@ -66,20 +53,13 @@ $(function(){
                                 ${element.title}
                                 </button>
                             </h2>
-                            <div id="class-${index}" class="accordion-collapse collapse show" aria-labelledby="area-${index}" data-bs-parent="#accordionLessons">
+                            <div id="class-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="area-${index}" data-bs-parent="#accordionLessons-${data.currentTarget.id}">
                                 <div class="accordion-body">
                                     <p>${element.description}</p>
                                 <div>
                             <div>
                         <div>
                     `)
-                    // $(`#collapse-${data.currentTarget.id} .accordion-item`).append(`
-                    //     <div id="class-${data.currentTarget.id}" class="accordion-collapse collapse show" aria-labelledby="area-${data.currentTarget.id}" data-bs-parent="#accordionLessons">
-                    //         <div class="accordion-body">
-                    //             <p>${element.description}</p>
-                    //         <div>
-                    //     <div>
-                    // `)
                 })
             })
         }
