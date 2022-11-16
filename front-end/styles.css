@@ -22,3 +22,27 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 .min-height_100 {
   min-height: 100vh;
 }
+
+.header-class h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #00131d;
+  opacity: 0.7;
+}
+
+.header-class h1:after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 0.2rem;
+  background: #d5007f;
+  margin-bottom: 2rem;
+  margin-top: 0.3em;
+}
+
+.header-class p {
+  color: #495961;
+  font-size: 1.1em;
+  font-weight: 300;
+  margin-bottom: 3em;
+}
