@@ -10,7 +10,7 @@ getIndex().then(v => {
     v.data.forEach((element, index) => {
         $('#accordion-module').append(`
         <div class="accordion-item">
-            <h2 class="accordion-header j_class ${index === 0 ? 'show' : ''}" id="${element.id}">
+            <h2 class="accordion-header j_class" id="${element.id}">
             <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}">
                 ${element.title}
             </button>
@@ -18,42 +18,40 @@ getIndex().then(v => {
         </div>
         `)
     })
-})
 
-$(function(){
-    $('body').on('click', '.j_class', function(data){
+    $('.j_class').each((index, element) => {
+        console.log(element, index)
 
-        if($(`#collapse-${data.currentTarget.id}`).length) {
-            console.log(`collapse-${data.currentTarget.id} existe`)
-
+        if($(`#collapse-${index}`).length) {
+            console.log(`collapse-${index} existe`)
         } else {
             $('#accordionClass').append(`
-            <div id="collapse-${data.currentTarget.id}" class="accordion-collapse collapse show" aria-labelledby="${data.currentTarget.id}"
-            data-bs-parent="#accordionClass">
-                <div class="accordion-body pe-5"></div>
-            </div>
+                <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="${index}"
+                data-bs-parent="#accordionClass">
+                    <div class="accordion-body pe-5"></div>
+                </div>
             `)
 
-            getModule(data.currentTarget.id).then(module => {
-                $(`#collapse-${data.currentTarget.id} .accordion-body`).prepend(`
+            getModule(index).then(module => {
+                $(`#collapse-${index} .accordion-body`).prepend(`
                 <div class='header-class d-flex flex-column'>
                     <h1>${module.data.title}</h1>
                     <p>${module.data.description}</p>
                 </div>
 
-                <div class="accordion" id="accordionLessons-${data.currentTarget.id}">
+                <div class="accordion" id="accordionLessons-${index}">
                 <div>
                 `)
-                module.data.contents.forEach((element, index) => {
-                    $(`#collapse-${data.currentTarget.id} #accordionLessons-${data.currentTarget.id}`).append(`
+                module.data.contents.forEach((element, id) => {
+                    $(`#collapse-${index} #accordionLessons-${index}`).append(`
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="area-${index}">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#class-${index}"
-                                aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="class-${index}">
+                            <h2 class="accordion-header" id="area-${id}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#class-${id}"
+                                aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${id}">
                                 ${element.title}
                                 </button>
                             </h2>
-                            <div id="class-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="area-${index}" data-bs-parent="#accordionLessons-${data.currentTarget.id}">
+                            <div id="class-${id}" class="accordion-collapse collapse ${id === 0 ? 'show' : ''}" aria-labelledby="area-${id}" data-bs-parent="#accordionLessons-${index}">
                                 <div class="accordion-body">
                                     <p>${element.description}</p>
                                 <div>

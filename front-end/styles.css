@@ -53,6 +53,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 #accordion-module .accordion-button.collapsed {
   border-left: 2px solid #79b2e7;
+  font-weight: 400;
+  font-size: 1.25em;
+  transition: all 0.5s ease;
 }
 
 #accordion-module .accordion-item,
@@ -75,14 +78,14 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   box-shadow: none;
 }
 
-#accordion-module .accordion-button:hover {
+#accordion-module .accordion-button {
+  border-left: 2px solid #d5ebff;
   font-weight: 700;
   font-size: 1.26em;
   transition: all 0.5s ease;
 }
 
-#accordion-module .show .accordion-button {
-  border-left: 2px solid #d5ebff;
+#accordion-module .accordion-button:hover {
   font-weight: 700;
   font-size: 1.26em;
   transition: all 0.5s ease;
