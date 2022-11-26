@@ -1,0 +1,92 @@
+.header-class h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #00131d;
+  opacity: 0.7;
+}
+
+.header-class h1:after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 0.2rem;
+  background: #d5007f;
+  margin-bottom: 2rem;
+  margin-top: 0.3em;
+}
+
+.header-class p {
+  color: #495961;
+  font-size: 1.1em;
+  font-weight: 300;
+  margin-bottom: 3em;
+}
+
+#accordion-module {
+  min-width: 430px;
+}
+
+#accordion-module .accordion-button.collapsed {
+  border-left: 2px solid #79b2e7;
+  font-weight: 400;
+  font-size: 1.25em;
+  transition: all 0.5s ease;
+}
+
+#accordion-module .accordion-item,
+#accordion-module .accordion-header {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+#accordion-module .accordion-button {
+  background: var(--bs-blue) !important;
+  color: var(--bs-white);
+  font-weight: 500;
+  font-size: 1.25em;
+  padding: 1.2em 1.5em;
+  border-radius: 0;
+  border: 0;
+  transition: all 0.5s ease;
+  outline: none;
+  box-shadow: none;
+}
+
+#accordion-module .accordion-button {
+  border-left: 2px solid #d5ebff;
+  font-weight: 700;
+  font-size: 1.26em;
+  transition: all 0.5s ease;
+}
+
+#accordion-module .accordion-button:hover {
+  font-weight: 700;
+  font-size: 1.26em;
+  transition: all 0.5s ease;
+}
+
+#accordion-module .accordion-button::after {
+  display: none;
+}
+
+#accordionClass .accordion {
+  box-shadow: 0px 20px 30px -5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#accordionClass .accordion-button {
+  color: #495961;
+  font-size: 1.2em;
+  font-weight: 400;
+  outline: none;
+  box-shadow: none;
+}
+
+#accordionClass p {
+  color: #495961;
+  font-size: 1.1em;
+  font-weight: 300;
+  margin: 20px;
+}
