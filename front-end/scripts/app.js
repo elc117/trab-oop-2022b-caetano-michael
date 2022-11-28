@@ -1,12 +1,12 @@
-$(function() {
+$(function () {
     const instance = axios.create({
         baseURL: 'http://localhost:3000',
         timeout: 1000
     })
-    
+
     const getIndex = async () => { return await instance.get('/index') }
     const getModule = async (id) => { return await instance.get(`/module/${id}`) }
-    
+
     getIndex().then(v => {
         v.data.forEach((element, index) => {
             $('#accordion-module').append(`
@@ -19,11 +19,11 @@ $(function() {
             </div>
             `)
         })
-    
+
         $('.j_class').each((index, element) => {
             console.log(element, index)
-    
-            if($(`#collapse-${index}`).length) {
+
+            if ($(`#collapse-${index}`).length) {
                 console.log(`collapse-${index} existe`)
             } else {
                 $('#accordionClass').append(`
@@ -32,7 +32,7 @@ $(function() {
                         <div class="accordion-body pe-5"></div>
                     </div>
                 `)
-    
+
                 getModule(index).then(module => {
                     $(`#collapse-${index} .accordion-body`).prepend(`
                     <div class='header-class d-flex flex-column'>
