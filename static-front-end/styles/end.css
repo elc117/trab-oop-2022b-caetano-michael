@@ -1,0 +1,17 @@
+.main-end-course .icon-check {
+    color: green;
+    font-size: 68px;
+}
+
+.main-end-course  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00131d;
+    opacity: 0.7;
+}
+
+.main-end-course  p {
+    color: #495961;
+    font-size: 1.1em;
+    font-weight: 300;
+}
