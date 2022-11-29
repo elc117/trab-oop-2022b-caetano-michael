@@ -1,22 +1,31 @@
 import { ref, set } from 'firebase/database'
-import { db } from '../service/Database'
+import db from '../service/Database'
+import { v4 as uuid } from 'uuid'
 import Content from './content'
 
 class Module {
   id: string
+  order: number
   title: string
   description: string
-  contents: Content[]
 
   constructor(title: string) {
     this.title = title
     this.description = ''
-    this.contents = []
-    this.id = ''
+    this.order = 0
+    this.id = uuid()
   }
 
-  addContent(content: Content) {
-    this.contents.push(content)
+  getOrder() {
+    return this.order
+  }
+
+  setOrder(v: number) {
+    this.order = v
+  }
+
+  getId() {
+    return this.id
   }
 
   getDescription() {
@@ -29,7 +38,7 @@ class Module {
 
   save() {
     const { id, ...data } = this
-    set(ref(db, 'contents/' + id), { ...data })
+    set(ref(db, 'modules/' + id), { ...data })
   }
 }
 
