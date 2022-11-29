@@ -1,6 +1,9 @@
+import { ref, set } from 'firebase/database'
+import { db } from '../service/Database'
 import Content from './content'
 
 class Module {
+  id: string
   title: string
   description: string
   contents: Content[]
@@ -9,6 +12,7 @@ class Module {
     this.title = title
     this.description = ''
     this.contents = []
+    this.id = ''
   }
 
   addContent(content: Content) {
@@ -21,6 +25,11 @@ class Module {
 
   setDescription(value: string) {
     this.description = value
+  }
+
+  save() {
+    const { id, ...data } = this
+    set(ref(db, 'contents/' + id), { ...data })
   }
 }
 

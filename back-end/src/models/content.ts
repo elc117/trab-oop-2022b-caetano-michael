@@ -1,12 +1,19 @@
+import { ref, set } from 'firebase/database'
+import { db } from '../service/Database'
+
 abstract class Content {
+  id: string
   title: string
   description: string
   type: string
+  moduleId: string
 
   constructor(title: string) {
     this.title = title
-    this.description = '';
+    this.description = ''
     this.type = ''
+    this.id = ''
+    this.moduleId = ''
   }
 
   getDescription() {
@@ -23,6 +30,11 @@ abstract class Content {
 
   setTitle(value: string) {
     this.title = value
+  }
+
+  save() {
+    const { id, ...data } = this
+    set(ref(db, 'contents/' + id), { ...data })
   }
 }
 
