@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid"
+import UserRepository from "../repository/UserRepository"
 import IProgress from "../Types/IProgress"
 
 class User {
@@ -16,28 +17,34 @@ class User {
     return this.id
   }
 
-  getName() {
-    return this.name
-  }
-
-  getProgress() {
-    return this.progress
-  }
-
   setId(id: string) {
     this.id = id
+  }
+
+  getName() {
+    return this.name
   }
 
   setName(name: string) {
     this.name = name
   }
 
+  getProgress() {
+    return this.progress
+  }
+
   setProgress(progress: IProgress) {
     this.progress = progress
   }
 
+  static async findByName(name: string): Promise<User | null> {
+    const repo = await new UserRepository()
+    return await repo.findByName(name)
+  }
+
   save() {
-    // implementar 
+    const repo = new UserRepository()
+    repo.save(this)
   }
 }
 

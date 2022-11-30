@@ -22,7 +22,6 @@ $(function () {
 
         $('.j_class').each((index, element) => {
             console.log(element, index)
-
             if ($(`#collapse-${index}`).length) {
                 console.log(`collapse-${index} existe`)
             } else {
@@ -33,7 +32,7 @@ $(function () {
                     </div>
                 `)
 
-                getModule(index).then(module => {
+                getModule(element.id).then(module => {
                     $(`#collapse-${index} .accordion-body`).prepend(`
                     <div class='header-class d-flex flex-column'>
                         <h1>${module.data.title}</h1>

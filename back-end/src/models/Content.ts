@@ -1,8 +1,7 @@
-import { ref, set } from 'firebase/database'
-import db from '../service/Database'
 import { v4 as uuid } from 'uuid'
+import ContentRepository from '../repository/ContentRepository'
 
-abstract class Content {
+class Content {
   id: string
   title: string
   description: string
@@ -19,12 +18,28 @@ abstract class Content {
     this.order = 0
   }
 
+  getId() {
+    return this.id
+  }
+
+  setId(id: string) {
+    this.id = id
+  }
+
   getOrder() {
     return this.order
   }
 
   setOrder(v: number) {
     this.order = v
+  }
+
+  getType() {
+    return this.type
+  }
+
+  setType(type: string) {
+    this.type = type
   }
 
   getDescription() {
@@ -51,9 +66,11 @@ abstract class Content {
     this.moduleId = value
   }
 
-  save() {
-    const { id, ...data } = this
-    set(ref(db, 'contents/' + id), { ...data })
+  static async getByModelId(id: string) {
+    const repo = await new ContentRepository()
+    const contents = await repo.getByModelId(id)
+
+    return contents
   }
 }
 

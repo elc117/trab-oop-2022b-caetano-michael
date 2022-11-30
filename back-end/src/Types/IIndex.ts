@@ -1,4 +1,5 @@
 export default interface IIndex {
-  id: number,
+  id: string,
+  order: number,
   title: string,
 }
