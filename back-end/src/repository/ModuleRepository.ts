@@ -31,7 +31,6 @@ class ModuleRepository {
       module.setOrder(moduleData.order)
       const moduleId = snapshot.ref.toString().split('/').at(-1)!
       module.setId(moduleId)
-      console.log(moduleData)
   
       return module
     }

@@ -29,6 +29,19 @@ routes.post('/session', async (req, res) => {
   res.json(user)
 })
 
+routes.patch('/progress/:id', async (req, res) => {
+  const { progress } = req.body
+  let user = await User.findById(req.params.id)
+  if (user) {
+    user.setProgress(progress)
+    user.save()
+    res.statusCode = 201
+    res.send()
+  }
+  res.statusCode = 404
+  res.send()
+})
+
 routes.get('/teste', async (req, res) => {
   // User.findByName('052fc08f-18e1-4f4d-9b89-0369c8e1dcb8')
   let test = await Content.getByModelId('53ad8009-3b38-473f-92ae-6b0d1368f169')

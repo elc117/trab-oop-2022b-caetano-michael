@@ -42,6 +42,11 @@ class User {
     return await repo.findByName(name)
   }
 
+  static async findById(id: string): Promise<User|null> {
+    const repo = await new UserRepository()
+    return await repo.findById(id)
+  }
+
   save() {
     const repo = new UserRepository()
     repo.save(this)
