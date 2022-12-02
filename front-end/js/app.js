@@ -8,6 +8,7 @@ $(function () {
     const getModule = async (id) => { return await instance.get(`/module/${id}`) }
 
     getIndex().then(v => {
+        v.data.sort((x, y) => x.order < y.order)
         v.data.forEach((element, index) => {
             $('#accordion-module').append(`
             <div class="accordion-item">
@@ -21,39 +22,44 @@ $(function () {
         })
 
         $('.j_class').each((index, element) => {
-            console.log(element, index)
-            if ($(`#collapse-${index}`).length) {
-                console.log(`collapse-${index} existe`)
+            if ($(`#collapse-${element.id}`).length) {
+                console.log(`collapse-${element.id} existe`)
             } else {
                 $('#accordionClass').append(`
-                    <div id="collapse-${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="${index}"
+                    <div id="collapse-${element.id}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="${element.id}"
                     data-bs-parent="#accordionClass">
                         <div class="accordion-body pe-5"></div>
                     </div>
                 `)
 
                 getModule(element.id).then(module => {
-                    $(`#collapse-${index} .accordion-body`).prepend(`
+                    $(`#collapse-${element.id} .accordion-body`).prepend(`
                     <div class='header-class d-flex flex-column'>
-                        <h1>${module.data.title}</h1>
-                        <p>${module.data.description}</p>
+                        <h1>${module.data.module.title}</h1>
+                        <p>${module.data.module.description}</p>
                     </div>
     
-                    <div class="accordion" id="accordionLessons-${index}">
+                    <div class="accordion" id="accordionLessons-${element.id}">
                     <div>
                     `)
-                    module.data.contents.forEach((element, id) => {
-                        $(`#collapse-${index} #accordionLessons-${index}`).append(`
+
+                    module.data.contents.sort((x,y) => {
+                        if(x.order < y.order) return -1
+                        if(x.order > y.order) return 1
+                        return 0
+                    })
+                    module.data.contents.forEach((content, id) => {
+                        $(`#collapse-${element.id} #accordionLessons-${element.id}`).append(`
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="area-${id}">
-                                    <button class="accordion-button ${index === 0 && id === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#class-${index}-${id}"
-                                    aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${index}-${id}">
-                                    ${element.title}
+                                    <button class="accordion-button ${id === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#class-${element.id}-${id}"
+                                    aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${element.id}-${id}">
+                                    ${content.title}
                                     </button>
                                 </h2>
-                                <div id="class-${index}-${id}" class="accordion-collapse collapse ${id === 0 ? 'show' : ''}" aria-labelledby="area-${id}" data-bs-parent="#accordionLessons-${index}">
+                                <div id="class-${element.id}-${id}" class="accordion-collapse collapse ${id === 0 ? 'show' : ''}" aria-labelledby="area-${id}" data-bs-parent="#accordionLessons-${element.id}">
                                     <div class="accordion-body">
-                                        <p>${element.description}</p>
+                                        <p>${content.description}</p>
                                     <div>
                                 <div>
                             <div>

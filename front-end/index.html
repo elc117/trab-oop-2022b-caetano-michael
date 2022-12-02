@@ -17,49 +17,74 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/boot.css" />
+    <link rel="stylesheet" href="styles/login.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <link rel="stylesheet" href="styles/end.css" />
   </head>
 
   <body>
-    <main class="min-height_100">
-      <!-- Navigation -->
-      <div class="d-flex flex-wrap min-height_100">
-        <div class="col-lg-5 col-12 min-height_100">
-          <div
-            class="bg-primary d-flex flex-column align-items-lg-end align-items-center justify-content-center min-height_100 pe-xl-5"
-          >
-            <!-- Modules -->
-            <div class="accordion" id="accordion-module"></div>
+    <div id="content" class="bg-primary">
+      <div class="container">
+        <main
+          class="min-height_100 d-flex justify-content-center align-items-center"
+        >
+          <div class="main-form-login mb-5">
+            <h1 class="title-login">
+              <i class="fa-solid fa-circle-dollar-to-slot me-2"></i>
+              Bem-vindo(a) ao curso de Educação Financeira
+            </h1>
+            <p class="description-login mt-3 mb-4">
+              O curso tem como objetivo introduzir a educação financeira a fim
+              de mostrar aspectos imporantes que são úteis no dia a dia de cada
+              indivíduo. Para iniciar o curso, baixa preencher os dados abaixo.
+              Aproveite!
+            </p>
+            <div class="card card-custom pt-2">
+              <div class="card-body">
+                <form class="row" id="form">
+                  <div class="col-12 mb-5">
+                    <label for="name" class="form-label"
+                      >Digite seu nome para iniciar</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="name"
+                      id="name"
+                      placeholder="Ex: João"
+                    />
+                  </div>
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-warning">
+                      <i class="fa-regular fa-circle-play"></i>
+                      Iniciar o Curso
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-7 col-12">
-          <div
-            id="accordionClass"
-            class="d-flex flex-column justify-content-center ps-5 min-height_100"
-          ></div>
-        </div>
+        </main>
       </div>
-    </main>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
-      integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-
-    <!-- <script src="src/scripts/scripts.js"></script> -->
-    <script src="scripts/app.js"></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
+        integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+      <script src="js/login.js"></script>
+    </div>
   </body>
 </html>

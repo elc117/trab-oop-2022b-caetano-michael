@@ -20,6 +20,7 @@ routes.get('/module/:id', async (req, res) => {
 })
 
 routes.post('/session', async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*")
   const { name } = req.body
   let user = await User.findByName(name)
   if (!user) {
@@ -30,6 +31,7 @@ routes.post('/session', async (req, res) => {
 })
 
 routes.patch('/progress/:id', async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*")
   const { progress } = req.body
   let user = await User.findById(req.params.id)
   if (user) {
