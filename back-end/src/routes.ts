@@ -20,7 +20,6 @@ routes.get('/module/:id', async (req, res) => {
 })
 
 routes.post('/session', async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*")
   const { name } = req.body
   let user = await User.findByName(name)
   if (!user) {

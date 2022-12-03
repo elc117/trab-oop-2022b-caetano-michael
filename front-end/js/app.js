@@ -8,6 +8,7 @@ $(function () {
     const getModule = async (id) => { return await instance.get(`/module/${id}`) }
 
     getIndex().then(v => {
+        $('#name').text($('#content').attr('data-name'))
         v.data.sort((x, y) => x.order < y.order)
         v.data.forEach((element, index) => {
             $('#accordion-module').append(`
@@ -70,3 +71,7 @@ $(function () {
         })
     })
 })
+
+function calcProgress(module, content) {
+    
+}
