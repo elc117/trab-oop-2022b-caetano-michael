@@ -9,12 +9,18 @@ $(function () {
 
     getIndex().then(v => {
         $('#name').text($('#content').attr('data-name'))
+        const lessonProgress = parseInt($('#content').attr('data-content'))
+        const moduleProgress = parseInt($('#content').attr('data-module'))
+        const totalModules = $.map(v.data, function(n, i) { return i; }).length
+        let progress = calcProgress(totalModules, moduleProgress)
+
+        $('#progress').css('width', `${progress}%`).attr('aria-valuenow', progress).text(`${progress}%`)
         v.data.sort((x, y) => x.order < y.order)
         v.data.forEach((element, index) => {
             $('#accordion-module').append(`
             <div class="accordion-item">
-                <h2 class="accordion-header j_class" id="${element.id}">
-                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}">
+                <h2 class="accordion-header j_class" id="${element.id}" data-module-id="${index}">
+                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}" ${index < lessonProgress ? '' : 'disabled'}>
                     ${element.title}
                 </button>
                 </h2>
@@ -22,12 +28,12 @@ $(function () {
             `)
         })
 
-        $('.j_class').each((index, element) => {
+        $('.j_class').each((idClass, element) => {
             if ($(`#collapse-${element.id}`).length) {
                 console.log(`collapse-${element.id} existe`)
             } else {
                 $('#accordionClass').append(`
-                    <div id="collapse-${element.id}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="${element.id}"
+                    <div id="collapse-${element.id}" class="accordion-collapse collapse ${idClass === 0 ? 'show' : ''}" aria-labelledby="${element.id}"
                     data-bs-parent="#accordionClass">
                         <div class="accordion-body pe-5"></div>
                     </div>
@@ -44,6 +50,8 @@ $(function () {
                     <div>
                     `)
 
+                    const moduleActive = $(`#${element.id}`).attr('data-module-id')
+
                     module.data.contents.sort((x,y) => {
                         if(x.order < y.order) return -1
                         if(x.order > y.order) return 1
@@ -54,7 +62,7 @@ $(function () {
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="area-${id}">
                                     <button class="accordion-button ${id === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#class-${element.id}-${id}"
-                                    aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${element.id}-${id}">
+                                    aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${element.id}-${id}" ${moduleActive < (moduleProgress - 1) ? '' : (id <= lessonProgress  ? '' : 'disabled')}>
                                     ${content.title}
                                     </button>
                                 </h2>
@@ -72,6 +80,6 @@ $(function () {
     })
 })
 
-function calcProgress(module, content) {
-    
+function calcProgress(total, module) {
+    return (module * 100) / total
 }

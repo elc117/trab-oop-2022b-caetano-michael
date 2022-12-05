@@ -22,7 +22,6 @@ $(function () {
                     "data-content": name.data.progress.content,
                     "data-module": name.data.progress.module
                 })
-                console.log(name);
             })
         }
 
