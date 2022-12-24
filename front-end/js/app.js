@@ -61,8 +61,8 @@ $(function () {
                         $(`#collapse-${element.id} #accordionLessons-${element.id}`).append(`
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="area-${id}">
-                                    <button class="accordion-button ${id === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#class-${element.id}-${id}"
-                                    aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${element.id}-${id}" ${moduleActive < (moduleProgress - 1) ? '' : (id <= lessonProgress  ? '' : 'disabled')}>
+                                    <button class="accordion-button j_update_progress ${id === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#class-${element.id}-${id}"
+                                    aria-expanded="${id === 0 ? 'true' : 'false'}" aria-controls="class-${element.id}-${id}" ${moduleActive < (moduleProgress - 1) ? '' : (id <= lessonProgress  ? '' : 'disabled')} data-class-id="${id}">
                                     ${content.title}
                                     </button>
                                 </h2>
