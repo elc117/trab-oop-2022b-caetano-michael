@@ -10,7 +10,7 @@ class User {
   constructor(name: string) {
     this.name = name
     this.id = uuid()
-    this.progress = { content: 1, module: 1 }
+    this.progress = { content: 0, module: 0 }
   }
 
   getId() {
@@ -42,7 +42,7 @@ class User {
     return await repo.findByName(name)
   }
 
-  static async findById(id: string): Promise<User|null> {
+  static async findById(id: string): Promise<User | null> {
     const repo = await new UserRepository()
     return await repo.findById(id)
   }
