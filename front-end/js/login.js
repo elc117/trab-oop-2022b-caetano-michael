@@ -17,7 +17,7 @@ $(function () {
 
             getByName().then(name => {
                 $('#content').removeClass('bg-primary').load('components/course.html').attr({
-                    "data-id": name.id,
+                    "data-id": name.data.id,
                     "data-name": name.data.name,
                     "data-content": name.data.progress.content,
                     "data-module": name.data.progress.module
