@@ -17,28 +17,39 @@ $(function () {
         let progress = 0
 
         if (currentContent > content) {
-            if (isLastContent) {
-                if (totalModules > module) {
-                    module++
-                    content = 0
-                } else if (totalModules == module) {
+            if (totalModules == module) {
+                console.log('terminei');
+            } else {
+                if (isLastContent) {
+                    if (totalModules > module) {
+                        module++
+
+                        if (module != totalModules) {
+                            content = 0
+                        } else {
+                            content ++
+                            $('#content').load('components/end.html', function() {
+                                $('#name').text($('#content').attr('data-name'))
+                            })
+                        }
+                    }
+                    
+                    $('#content').attr('data-module', module)
+                    $(`#accordion-module .j_class[data-module-id="${module}"]`).find('button').prop('disabled', false)
+                } else {
                     content++
                 }
-                $('#content').attr('data-module', module)
-                $(`#accordion-module .j_class[data-module-id="${module}"]`).find('button').prop('disabled', false)
-            } else {
-                content++
+    
+                $(`#accordionLessons-${moduleId} #area-${content + 1}`).find('button').prop('disabled', false)
+    
+                $('#content').attr('data-content', content)
+                await instance.patch(`/progress/${idUser}`, { 
+                    progress: {
+                        content: content,
+                        module: module
+                    }
+                })
             }
-
-            $(`#accordionLessons-${moduleId} #area-${content + 1}`).find('button').prop('disabled', false)
-
-            $('#content').attr('data-content', content)
-            await instance.patch(`/progress/${idUser}`, { 
-                progress: {
-                    content: content,
-                    module: module
-                }
-            })
         }
 
         progress = calcProgress(totalModules, module)
