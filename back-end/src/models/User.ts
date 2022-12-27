@@ -10,7 +10,7 @@ class User {
   constructor(name: string) {
     this.name = name
     this.id = uuid()
-    this.progress = { content: 1, module: 1 }
+    this.progress = { content: 0, module: 0 }
   }
 
   getId() {
