@@ -12,6 +12,8 @@ $(function () {
         const lessonProgress = parseInt($('#content').attr('data-content'))
         const moduleProgress = parseInt($('#content').attr('data-module'))
         const totalModules = $.map(v.data, function(n, i) { return i; }).length
+        $('#content').attr('data-total-modules', totalModules)
+
         let progress = calcProgress(totalModules, moduleProgress)
 
         $('#progress').css('width', `${progress}%`).attr('aria-valuenow', progress).text(`${progress}%`)
@@ -20,7 +22,7 @@ $(function () {
             $('#accordion-module').append(`
             <div class="accordion-item">
                 <h2 class="accordion-header j_class" id="${element.id}" data-module-id="${index}">
-                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}" ${index = moduleProgress ? '' : 'disabled'}>
+                <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${element.id}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="#collapse-${element.id}" ${index <= moduleProgress ? '' : 'disabled'}>
                     ${element.title}
                 </button>
                 </h2>
@@ -81,5 +83,5 @@ $(function () {
 })
 
 function calcProgress(total, module) {
-    return (module * 100) / total
+    return ((module) * 100) / total
 }
