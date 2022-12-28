@@ -28,9 +28,11 @@ $(function () {
                             content = 0
                         } else {
                             content ++
-                            $('#content').load('components/end.html', function() {
-                                $('#name').text($('#content').attr('data-name'))
-                            })
+                            setTimeout(function() { 
+                                $('#content').load('components/end.html', function() {
+                                    $('#name').text($('#content').attr('data-name'))
+                                })
+                            }, 5000)
                         }
                     }
                     
