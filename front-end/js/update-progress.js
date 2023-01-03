@@ -1,39 +1,64 @@
 $(function () {
-    $('body').on('click', '.j_update_progress', function(e) {
+    const instance = axios.create({
+        baseURL: 'http://localhost:3000',
+        timeout: 1000,
+    })
 
-        const lesson = $('#content').attr('data-content')
-        const module = parseInt($('#content').attr('data-module')) - 1
-        const currentLesson = $(this).attr('data-class-id')
+    $('body').on('click', '.j_update_progress', async function(e) {
+
+        const idUser = $('#content').attr('data-id')
+        let content = parseInt($('#content').attr('data-content'))
+        let module = parseInt($('#content').attr('data-module'))
+        const currentContent = parseInt($(this).attr('data-class-id'))
         const moduleId = $(this).attr('aria-controls').substring(6,42)
-        const currentModule = $(`#${moduleId}:not(:disabled)`).attr('data-module-id')
-        let nextLesson = parseInt(lesson)
+        const currentModule = parseInt($(`#${moduleId}:not(:disabled)`).attr('data-module-id'))
+        const isLastContent = $(`#accordionLessons-${moduleId} #area-${currentContent + 1}`).find('button').length === 0
+        const totalModules = $('#content').attr('data-total-modules')
+        let progress = 0
 
-        // console.log(currentLesson, currentModule, lesson, module, nextLesson);
-
-        // console.log($(`#area-${nextLesson}`).find('button').attr('data-class-id'));
-        // console.log(moduleId, lesson, $(`#area-${nextLesson}`).find('button'));
-        console.log("Current lesson: " + currentLesson, "\nStoped lesson: " + nextLesson);
-        console.log("Current modaule: " + currentModule, "\nStoped module: " + module);
-        // console.log($(`#accordionLessons-${moduleId} #area-${nextLesson}`).find('button'));
-
-        if (currentLesson >= nextLesson && module == currentModule){
-            nextLesson++
-            if ($(`#accordionLessons-${moduleId} #area-${nextLesson}`).find('button').length === 1) {
-                let newLesson = $(`#accordionLessons-${moduleId} #area-${nextLesson}`).find('button').attr('data-class-id')
-                $(`#accordionLessons-${moduleId} #area-${nextLesson}`).find('button').prop('disabled', false)
-                $('#content').attr('data-content', newLesson)
-    
-            }
-
-            if($(`#accordionLessons-${moduleId} #area-${parseInt(nextLesson + 1)}`).find('button').length === 1) {
-                $('#content').attr('data-content', nextLesson)
-
+        if (currentContent > content) {
+            if (totalModules == module) {
+                console.log('terminei');
             } else {
-                let newModule = parseInt(module) + 2
-                $('#content').attr('data-module', newModule)
-                $('#content').attr('data-content', 0)
-                $(`#accordion-module .j_class[data-module-id="${parseInt(newModule - 1)}"]`).find('button').prop('disabled', false)
+                if (isLastContent) {
+                    if (totalModules > module) {
+                        module++
+
+                        if (module != totalModules) {
+                            content = 0
+                        } else {
+                            content ++
+                            setTimeout(function() { 
+                                $('#content').load('components/end.html', function() {
+                                    $('#name').text($('#content').attr('data-name'))
+                                })
+                            }, 5000)
+                        }
+                    }
+                    
+                    $('#content').attr('data-module', module)
+                    $(`#accordion-module .j_class[data-module-id="${module}"]`).find('button').prop('disabled', false)
+                } else {
+                    content++
+                }
+    
+                $(`#accordionLessons-${moduleId} #area-${content + 1}`).find('button').prop('disabled', false)
+    
+                $('#content').attr('data-content', content)
+                await instance.patch(`/progress/${idUser}`, { 
+                    progress: {
+                        content: content,
+                        module: module
+                    }
+                })
             }
         }
+
+        progress = calcProgress(totalModules, module)
+        $('#progress').css('width', `${progress}%`).attr('aria-valuenow', progress).text(`${progress}%`)
     })
 })
+
+function calcProgress(total, module) {
+    return ((module) * 100) / total
+}
